@@ -1,15 +1,29 @@
 package com.catalin.selenium.framework.pages;
 
-import com.catalin.selenium.framework.driver.DriverManager;
-import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
-public class HomePage {
+public class HomePage extends BasePage{
 
-    private final By header = By.tagName("h1");
+    @FindBy(tagName = "h1")
+    private WebElement header;
 
-    public String getHeaderText(){
-        return DriverManager.getDriver()
-                .findElement(header)
-                .getText();
+    @FindBy(css = "img[alt='Fork me on GitHub']")
+    private WebElement forkMeOnGitHubBanner;
+
+    public String getHeaderText() {
+        waitForVisibility(header);
+        return header.getText();
+    }
+
+    public boolean isForkMeOnGitHubDisplayed() {
+        waitForVisibility(forkMeOnGitHubBanner);
+        return forkMeOnGitHubBanner.isDisplayed();
+    }
+
+    public boolean isPresentOnPage() {
+        waitForVisibility(header);
+        waitForVisibility(forkMeOnGitHubBanner);
+        return true;
     }
 }
