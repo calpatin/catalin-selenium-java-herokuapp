@@ -1,4 +1,4 @@
-@smoke @UI @Run
+@smoke @UI
 Feature: Open Herokuapp homepage
 
   Scenario: User opens the  Herokuapp homepage
