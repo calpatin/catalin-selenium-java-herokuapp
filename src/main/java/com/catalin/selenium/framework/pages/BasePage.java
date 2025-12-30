@@ -4,6 +4,7 @@ import com.catalin.selenium.framework.config.ConfigManager;
 import com.catalin.selenium.framework.driver.DriverManager;
 import com.google.common.base.Function;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -71,4 +72,9 @@ public abstract class BasePage {
     protected void switchToDefaultContent() {
         driver.switchTo().defaultContent();
     }
+
+    protected Actions actions() {
+        return new Actions(driver);
+    }
+
 }
