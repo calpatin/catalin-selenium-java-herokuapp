@@ -47,8 +47,8 @@ public class JavaScriptsAlertsSteps {
     }
 
     @Then("The prompt result contains {string}")
-    public void confirmPromptResult(String text) {
-        Assert.assertTrue(javaScriptAlertsPage.getResultText().contains(text));
+    public void confirmPromptResult(String expectedText) {
+        Assert.assertTrue(javaScriptAlertsPage.getResultText().contains(expectedText));
     }
 
 

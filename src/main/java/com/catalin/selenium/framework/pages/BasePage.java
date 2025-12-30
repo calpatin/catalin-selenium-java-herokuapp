@@ -40,7 +40,7 @@ public abstract class BasePage {
     }
 
     protected void click(WebElement element) {
-        waitForClickability(element);
+        waitForVisibility(element);
         element.click();
     }
 
@@ -62,5 +62,13 @@ public abstract class BasePage {
 
     protected Alert waitForAlert() {
         return wait.until(ExpectedConditions.alertIsPresent());
+    }
+
+    protected void switchToFrame(WebElement frame) {
+        wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(frame));
+    }
+
+    protected void switchToDefaultContent() {
+        driver.switchTo().defaultContent();
     }
 }
