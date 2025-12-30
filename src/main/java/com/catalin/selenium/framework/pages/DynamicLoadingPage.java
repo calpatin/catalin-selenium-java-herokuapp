@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class DynamicLoadingPage extends BasePage {
 
-    //    locators for Example2
+    //    locators for Example1
     @FindBy(linkText = "Dynamic Loading")
     private WebElement dynamicLoadingPage;
 

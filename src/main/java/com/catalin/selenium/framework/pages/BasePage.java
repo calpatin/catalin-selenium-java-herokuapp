@@ -49,7 +49,7 @@ public abstract class BasePage {
         return element.getText();
     }
 
-//    generic fluent wait
+    //    generic fluent wait
     protected <T> T fluentWait(Function<WebDriver, T> condition) {
         FluentWait<WebDriver> fluentWait = new FluentWait<>(DriverManager.getDriver())
                 .withTimeout(Duration.ofSeconds(15))
@@ -58,5 +58,9 @@ public abstract class BasePage {
                 .ignoring(StaleElementReferenceException.class);
 
         return fluentWait.until(condition);
+    }
+
+    protected Alert waitForAlert() {
+        return wait.until(ExpectedConditions.alertIsPresent());
     }
 }

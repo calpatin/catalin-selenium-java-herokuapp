@@ -1,4 +1,4 @@
-@UI @smoke
+@UI @smoke @explicitWaits
 Feature: Dynamic loading examples
 
   Scenario Outline: Dynamic Loading works correctly

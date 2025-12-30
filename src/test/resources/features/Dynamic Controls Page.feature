@@ -1,4 +1,4 @@
-@UI @fluentWait @Run
+@UI @fluentWaits
 Feature: Dynamic controls with Fluent Wait
 
   Scenario: Verify Checkbox is dynamically removed
