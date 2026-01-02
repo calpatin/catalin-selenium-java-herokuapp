@@ -61,16 +61,16 @@ The framework uses **Cucumber integrated with TestNG**.
 
 ```java
 @CucumberOptions(
-    features = "src/test/resources/features",
-    glue = {
-        "com.catalin.selenium.steps",
-        "com.catalin.selenium.hooks"
-    },
-    plugin = {
-        "pretty",
-        "html:target/cucumber-report.html"
-    },
-    monochrome = true
+        features = "src/test/resources/features",
+        glue = {
+                "com.catalin.selenium.steps",
+                "com.catalin.selenium.hooks"
+        },
+        plugin = {
+                "pretty",
+                "html:target/cucumber-report.html"
+        },
+        monochrome = true
 )
 public class TestRunner extends AbstractTestNGCucumberTests {}
 ```
@@ -278,6 +278,94 @@ Examples:
 * Defensive handling of UI limitations
 * Stable and explainable tests
 * Realistic enterprise‑style decisions
+
+---
+
+## Selenium vs Selenide
+
+This framework intentionally demonstrates **both Selenium and Selenide** side by side, to highlight the trade-offs between control and productivity.
+
+### Why Selenium first
+
+The framework was initially built using **pure Selenium** in order to:
+
+* fully understand WebDriver internals
+* control browser lifecycle explicitly
+* design a robust wait strategy (explicit & fluent waits)
+* handle complex scenarios (frames, alerts, windows, dynamic elements)
+
+Selenium provides **maximum control**, but requires more boilerplate code and careful synchronization.
+
+---
+
+### Why introduce Selenide
+
+After the Selenium foundation was established, **Selenide was introduced incrementally** (not as a replacement, but as an enhancement) to demonstrate:
+
+* reduction of boilerplate code
+* implicit waits and automatic retry mechanisms
+* improved readability and expressiveness
+* fewer flaky tests for common UI interactions
+
+Selenide uses Selenium internally, but provides a **higher-level API** focused on test stability and developer productivity.
+
+---
+
+### Key Differences at a Glance
+
+| Aspect         | Selenium                | Selenide                            |
+| -------------- | ----------------------- | ----------------------------------- |
+| Element type   | WebElement              | SelenideElement                     |
+| Element lookup | Immediate / proxy-based | Lazy (re-evaluated)                 |
+| Waits          | Explicit / Fluent       | Implicit, built-in                  |
+| Assertions     | External (TestNG)       | Built-in (`shouldHave`, `shouldBe`) |
+| PageFactory    | Required                | Not used                            |
+| Boilerplate    | High                    | Low                                 |
+| Control level  | Very high               | High                                |
+
+---
+
+### Practical Comparison (Dropdown Example)
+
+**Selenium approach:**
+
+* Explicit waits handled via BasePage
+* `Select` API used manually
+* Assertions written explicitly using TestNG
+
+**Selenide approach:**
+
+* No explicit waits required
+* No `Select` object needed
+* Assertions expressed declaratively via conditions
+
+The same business behavior is tested, but the Selenide version is:
+
+* shorter
+* easier to read
+* less error-prone
+
+---
+
+### Important Limitations (Same for Both)
+
+Some Selenium limitations **are not solved by Selenide**, for example:
+
+* HTML5 drag & drop (requires JavaScript workaround)
+* Application-side restrictions (e.g. read-only editors)
+
+These cases are **explicitly documented** and corresponding scenarios are marked as `@Defect` when appropriate.
+
+---
+
+### Design Decision
+
+This project intentionally supports a **hybrid approach**:
+
+* Selenium is used for complex, low-level interactions
+* Selenide is used for simpler, high-level UI flows
+
+This mirrors real enterprise projects, where multiple tools often coexist based on context.
 
 ---
 

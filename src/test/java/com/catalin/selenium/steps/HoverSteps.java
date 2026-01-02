@@ -8,7 +8,7 @@ import io.cucumber.java.en.When;
 import org.testng.Assert;
 
 public class HoverSteps {
-    private HoversPage hoversPage = new HoversPage();
+    private final HoversPage hoversPage = new HoversPage();
 
     @Given("I open the Hover Page")
     public void openHoverPage() {

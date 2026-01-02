@@ -9,7 +9,7 @@ import org.testng.Assert;
 
 public class DynamicControlsSteps {
 
-    private DynamicControlsPage dynamicControlsPage = new DynamicControlsPage();
+    private final DynamicControlsPage dynamicControlsPage = new DynamicControlsPage();
 
     @Given("I open the Dynamic Controls Page")
     public void openDynamicControls() {
