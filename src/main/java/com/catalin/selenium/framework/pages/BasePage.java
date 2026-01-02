@@ -8,9 +8,11 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.Set;
 
 public abstract class BasePage {
 
@@ -75,6 +77,29 @@ public abstract class BasePage {
 
     protected Actions actions() {
         return new Actions(driver);
+    }
+
+    protected Select select(WebElement element) {
+        return new Select(element);
+    }
+
+    protected String getCurrentWindow() {
+        return driver.getWindowHandle();
+    }
+
+    protected void switchToWindow(String windowHandle) {
+        driver.switchTo().window(windowHandle);
+    }
+
+    protected void switchToNewWindow(String originalWindow) {
+        Set<String> windows = driver.getWindowHandles();
+
+        for (String window : windows) {
+            if(!window.equals(originalWindow)) {
+                driver.switchTo().window(window);
+                return;
+            }
+        }
     }
 
 }
